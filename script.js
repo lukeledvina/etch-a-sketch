@@ -1,22 +1,46 @@
 const container = document.querySelector("#container");
 
+const button = document.querySelector("#clear");
 // create sub container with 16 divs, append to container, repeat 16 times
 
-for(let i = 0; i < 16; i++) {
-    let subContainer = document.createElement('div');
-    subContainer.setAttribute('class', 'sub-container');
-    for(let i = 0; i < 16; i++) {
-        let childDiv = document.createElement('div');
-        childDiv.setAttribute('class', 'box');
-        subContainer.appendChild(childDiv);
 
+//get user input, replace 16 with that
+// divide 800 by the user input amount, set div width to that amount
+function createGrid(userInput=16) {
+    for(let i = 0; i < userInput; i++) {
+        let subContainer = document.createElement('div');
+        subContainer.setAttribute('class', 'sub-container');
+        for(let i = 0; i < userInput; i++) {
+            let childDiv = document.createElement('div');
+            childDiv.setAttribute('class', 'box');
+            childDiv.style.width = `${800 / userInput}`
+            childDiv.style.height = `${800 / userInput}`
+            subContainer.appendChild(childDiv);
+    
+        }
+        container.appendChild(subContainer);
     }
-    container.appendChild(subContainer);
+    const boxes = document.querySelectorAll(".box");
+
+    boxes.forEach(box => {
+
+        box.addEventListener("mouseover", () => box.style.backgroundColor = "black");
+});
+}
+createGrid();
+
+
+
+function resetContainerChildren(parent) {
+    while(parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
 }
 
-const boxes = document.querySelectorAll(".box");
 
-boxes.forEach(box => {
-
-    box.addEventListener("mouseover", () => box.style.backgroundColor = "black");
-});
+button.addEventListener('click', () => {
+    const boxes = document.querySelectorAll(".box");
+    boxes.forEach(box => box.style.backgroundColor = "white");
+    resetContainerChildren(container);
+    createGrid(parseInt(prompt("Enter a new number of rows for the grid:")));
+})
