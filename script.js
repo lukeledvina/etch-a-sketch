@@ -13,20 +13,21 @@ function createGrid(userInput=16) {
     for(let i = 0; i < userInput; i++) {
         let subContainer = document.createElement('div');
         subContainer.setAttribute('class', 'sub-container');
+        subContainer.style.minHeight = `${800/ userInput}`
         for(let i = 0; i < userInput; i++) {
             let childDiv = document.createElement('div');
             childDiv.setAttribute('class', 'box');
             childDiv.style.width = `${800 / userInput}`
-            childDiv.style.height = `${800 / userInput}`
+            
             subContainer.appendChild(childDiv);
     
         }
+         
         container.appendChild(subContainer);
     }
     const boxes = document.querySelectorAll(".box");
 
     boxes.forEach(box => {
-
         box.addEventListener("mouseover", () => box.style.backgroundColor = "black");
 });
 }
