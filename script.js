@@ -7,6 +7,9 @@ const button = document.querySelector("#clear");
 //get user input, replace 16 with that
 // divide 800 by the user input amount, set div width to that amount
 function createGrid(userInput=16) {
+    if(userInput > 100){
+        userInput = 100;
+    }
     for(let i = 0; i < userInput; i++) {
         let subContainer = document.createElement('div');
         subContainer.setAttribute('class', 'sub-container');
